@@ -1,0 +1,308 @@
+<mat-toolbar class="topbar">
+  <button mat-icon-button class="menu-button" aria-label="Toggle navigation" (click)="toggleDrawer()">
+    <span class="hamburger" aria-hidden="true"></span>
+  </button>
+
+  <button class="brand" type="button" (click)="navigateTo('home')" aria-label="Return home">
+    <span class="brand-mark" aria-hidden="true">
+      <span class="dot blue"></span><span class="dot red"></span>
+      <span class="dot yellow"></span><span class="dot green"></span>
+    </span>
+    <span class="brand-title">Google AI Agents <span>&amp; A2UI</span></span>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+  <span class="capstone-label">UofL Capstone · Fall 2026</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    class="navigation-rail"
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="drawerOpen()"
+    [fixedInViewport]="true"
+    [fixedTopGap]="65"
+    (closedStart)="drawerOpen.set(false)"
+  >
+    <nav aria-label="Page sections">
+      @for (item of navItems; track item.id) {
+        <button
+          type="button"
+          class="rail-item"
+          [class.active]="activeSection() === item.id"
+          (click)="navigateTo(item.id)"
+          [attr.aria-current]="activeSection() === item.id ? 'page' : null"
+        >
+          <span class="rail-icon" aria-hidden="true">{{ item.icon }}</span>
+          <span>{{ isMobile() ? item.label : item.shortLabel }}</span>
+        </button>
+      }
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main>
+      <section class="hero section" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> University of Louisville Capstone</p>
+          <h1>Google AI Agents<br><span>&amp; A2UI</span></h1>
+          <p class="hero-lede">
+            Helping existing Storybook component libraries become structured, validated catalogs for agent-generated interfaces.
+          </p>
+          <div class="hero-actions">
+            <button mat-flat-button class="primary-action" (click)="navigateTo('project')">Explore the project</button>
+            <button mat-stroked-button class="secondary-action" (click)="navigateTo('process')">See how it works</button>
+          </div>
+        </div>
+
+        <div class="hero-system" aria-label="Storybook to A2UI transformation overview">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <mat-card class="system-card storybook-card">
+            <span class="system-number">01</span>
+            <strong>Storybook</strong>
+            <small>Your existing component library</small>
+          </mat-card>
+          <div class="system-arrow arrow-one">↘</div>
+          <mat-card class="system-card exporter-card">
+            <span class="system-number">02</span>
+            <strong>Catalog exporter</strong>
+            <small>Extract · Map · Validate</small>
+          </mat-card>
+          <div class="system-arrow arrow-two">↙</div>
+          <mat-card class="system-card a2ui-card">
+            <span class="system-number">03</span>
+            <strong>A2UI</strong>
+            <small>Agent-ready component catalog</small>
+          </mat-card>
+        </div>
+      </section>
+
+      <section class="section why-section" id="project">
+        <div class="section-heading narrow-heading">
+          <p class="eyebrow blue-label">Why this matters</p>
+          <h2>Bring your existing component library into A2UI.</h2>
+          <p>
+            Many development teams already use Storybook to build, document, and test their UI components. But those components cannot automatically be understood or used by an A2UI agent.
+          </p>
+          <p>
+            Our project bridges that gap by extracting component metadata, mapping it to the A2UI catalog format, validating the generated definitions, and producing a catalog for an A2UI workflow.
+          </p>
+        </div>
+
+        <div class="value-grid">
+          <mat-card class="value-card blue-value">
+            <span class="value-icon">↻</span>
+            <h3>Reuse existing work</h3>
+            <p>Start with components your team has already designed, documented, and tested.</p>
+          </mat-card>
+          <mat-card class="value-card red-value">
+            <span class="value-icon">≡</span>
+            <h3>Reduce manual authoring</h3>
+            <p>Automate the repetitive work involved in creating A2UI catalog definitions.</p>
+          </mat-card>
+          <mat-card class="value-card green-value">
+            <span class="value-icon">✓</span>
+            <h3>Preserve consistency</h3>
+            <p>Keep agent-generated interfaces aligned with the product's established component system.</p>
+          </mat-card>
+        </div>
+      </section>
+
+      <section class="section process-section" id="process">
+        <div class="section-heading">
+          <p class="eyebrow yellow-label">How it works</p>
+          <h2>A practical bridge between two component ecosystems.</h2>
+          <p>One pipeline turns Storybook's component metadata into a catalog that follows the structure A2UI expects.</p>
+        </div>
+
+        <div class="pipeline">
+          <article class="pipeline-step">
+            <span class="step-index blue-bg">1</span>
+            <div>
+              <p class="step-kicker">Input</p>
+              <h3>Discover Storybook metadata</h3>
+              <p>Read the stories and component information already produced by a Storybook build.</p>
+            </div>
+          </article>
+          <span class="pipeline-connector"></span>
+          <article class="pipeline-step">
+            <span class="step-index red-bg">2</span>
+            <div>
+              <p class="step-kicker">Transform</p>
+              <h3>Map schemas and fill gaps</h3>
+              <p>Translate useful fields into A2UI definitions and handle missing or unsupported metadata.</p>
+            </div>
+          </article>
+          <span class="pipeline-connector"></span>
+          <article class="pipeline-step">
+            <span class="step-index yellow-bg">3</span>
+            <div>
+              <p class="step-kicker">Verify</p>
+              <h3>Validate the catalog</h3>
+              <p>Check the generated data against typed models before it reaches an agent workflow.</p>
+            </div>
+          </article>
+          <span class="pipeline-connector"></span>
+          <article class="pipeline-step">
+            <span class="step-index green-bg">4</span>
+            <div>
+              <p class="step-kicker">Output</p>
+              <h3>Load it into A2UI</h3>
+              <p>Produce a catalog that can be tested in Composer and supplied to an A2UI-capable agent.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section milestones-section" id="milestones">
+        <div class="section-heading milestones-heading">
+          <p class="eyebrow green-label">Project timeline</p>
+          <h2>From exploration to a working export pipeline.</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot blue-bg"></span>
+            <div class="timeline-date">August 2026</div>
+            <div class="timeline-copy">
+              <h3>Foundations</h3>
+              <p>Set up A2UI Composer and Storybook, then studied both component models.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot red-bg"></span>
+            <div class="timeline-date">September 2026</div>
+            <div class="timeline-copy">
+              <h3>Catalog exploration</h3>
+              <p>Built Angular Material and ShadCN Storybook catalogs and began comparing their metadata.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot yellow-bg"></span>
+            <div class="timeline-date">October 2026</div>
+            <div class="timeline-copy">
+              <h3>Export proof of concept</h3>
+              <p>Mapped Storybook data to A2UI JSON and tested the resulting catalog in Composer.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot green-bg"></span>
+            <div class="timeline-date">Current focus</div>
+            <div class="timeline-copy">
+              <h3>Validation and hardening</h3>
+              <p>Testing varied Storybook inputs, strengthening schema validation, and identifying fragile cases.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section highlights-section" id="highlights">
+        <div class="section-heading">
+          <p class="eyebrow red-label">Project highlights</p>
+          <h2>Designed around real developer workflows.</h2>
+        </div>
+
+        <div class="highlight-grid">
+          <mat-card class="highlight-card primary-highlight">
+            <span class="highlight-overline">Core deliverable</span>
+            <h3>Storybook → A2UI catalog export</h3>
+            <p>A focused conversion path from existing component documentation to structured agent context.</p>
+            <div class="code-line" aria-label="Example file transformation">
+              <span>index.json</span><b>→</b><span>catalogs.json</span>
+            </div>
+          </mat-card>
+
+          <mat-card class="highlight-card">
+            <span class="highlight-overline">Design system test</span>
+            <h3>Angular Material catalog</h3>
+            <p>Material components provide a practical, documented library for testing extraction and mapping.</p>
+            <mat-chip-set aria-label="Angular technologies">
+              <mat-chip>Angular</mat-chip><mat-chip>Material 3</mat-chip><mat-chip>Storybook</mat-chip>
+            </mat-chip-set>
+          </mat-card>
+
+          <mat-card class="highlight-card">
+            <span class="highlight-overline">Quality</span>
+            <h3>Schema-first validation</h3>
+            <p>Typed validation makes missing fields and unsupported component definitions visible before export.</p>
+            <mat-chip-set aria-label="Validation technologies">
+              <mat-chip>Pydantic</mat-chip><mat-chip>A2UI schema</mat-chip>
+            </mat-chip-set>
+          </mat-card>
+        </div>
+      </section>
+
+      <section class="section team-section" id="team">
+        <div class="section-heading">
+          <p class="eyebrow blue-label">The team</p>
+          <h2>Four students, one shared pipeline.</h2>
+          <p>Working together across component catalogs, schema transformation, testing, and project presentation.</p>
+        </div>
+
+        <div class="team-grid">
+          <mat-card class="person-card">
+            <div class="person-initial blue-bg">A</div>
+            <h3>Audrey Lundy</h3>
+            <p class="person-role">Component catalogs &amp; data validation</p>
+          </mat-card>
+          <mat-card class="person-card">
+            <div class="person-initial red-bg">O</div>
+            <h3>Omar Avdic</h3>
+            <p class="person-role">Storybook export &amp; A2UI tooling</p>
+          </mat-card>
+          <mat-card class="person-card">
+            <div class="person-initial yellow-bg">E</div>
+            <h3>Eric Dong</h3>
+            <p class="person-role">Export pipeline &amp; showcase experience</p>
+          </mat-card>
+          <mat-card class="person-card">
+            <div class="person-initial green-bg">M</div>
+            <h3>Matangi Vagula Bhaskaran</h3>
+            <p class="person-role">Schema validation &amp; framework research</p>
+          </mat-card>
+        </div>
+      </section>
+
+      <section class="section acknowledgments-section" id="acknowledgments">
+        <div class="acknowledgments-inner">
+          <div class="section-heading">
+            <p class="eyebrow yellow-label">Acknowledgments</p>
+            <h2>Guided by educators, mentors, and open-source communities.</h2>
+          </div>
+
+          <div class="thanks-grid">
+            <div class="thanks-entry">
+              <span>Industry lead &amp; mentor</span>
+              <strong>Alan Blount</strong>
+            </div>
+            <div class="thanks-entry">
+              <span>Faculty advisor</span>
+              <strong>Dr. Jeff Squyres</strong>
+            </div>
+            <div class="thanks-entry">
+              <span>Faculty advisor</span>
+              <strong>Sai Nethra Betgeri</strong>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <p class="community-thanks">
+            With thanks to the University of Louisville Speed School of Engineering and the Google A2UI, Angular, and Storybook open-source communities.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <span class="dot blue"></span><span class="dot red"></span>
+          <span class="dot yellow"></span><span class="dot green"></span>
+        </span>
+        <strong>Google AI Agents &amp; A2UI</strong>
+      </div>
+      <span>University of Louisville · Computer Science &amp; Engineering Capstone · 2026</span>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
