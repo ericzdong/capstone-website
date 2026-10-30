@@ -54,26 +54,33 @@
   cursor: pointer;
 }
 
-.brand-mark {
+.a2ui-brand-mark {
   display: grid;
-  grid-template-columns: repeat(2, 8px);
-  gap: 3px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #009688;
 }
 
-.brand-mark.small {
-  grid-template-columns: repeat(2, 6px);
-  gap: 2px;
+.a2ui-brand-mark img {
+  display: block;
+  width: 32px;
+  height: 32px;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+.a2ui-brand-mark.small {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  border-radius: 8px;
 }
 
-.small .dot {
-  width: 6px;
-  height: 6px;
+.a2ui-brand-mark.small img {
+  width: 27px;
+  height: 27px;
 }
 
 .blue, .blue-bg { background: #4285f4; }
@@ -180,13 +187,6 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.eyebrow > span {
-  width: 26px;
-  height: 4px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #4285f4 0 25%, #ea4335 25% 50%, #fbbc04 50% 75%, #34a853 75%);
 }
 
 .hero h1 {
@@ -573,7 +573,7 @@ mat-chip-set {
 }
 
 .person-card {
-  min-height: 250px;
+  min-height: 190px;
   padding: 28px;
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -596,12 +596,6 @@ mat-chip-set {
 .person-card h3 {
   margin: 38px 0 8px;
   font-size: 22px;
-}
-
-.person-role {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
 }
 
 .acknowledgments-section {
